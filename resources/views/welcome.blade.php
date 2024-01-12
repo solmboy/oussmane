@@ -15,7 +15,7 @@
   <div class="row">
     <div class="col-lg-3 pt-4 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center text-left">
       
-    <p class="aba bg-primary animate__animated animate__backInLeft mb-5">Un etudiant, un stage
+    <p class="aba bg-primary  mb">Un etudiant, un stage
       <br>FORMATION DE STAGE 100% PRATIQUE
     </p>
                 <h1 class=" mt-4">Donner les Jeunes Formés un stage </h1>
@@ -637,10 +637,12 @@ pierre à l’édifice ».
 
  
 @media (max-width: 768px) {
-  .container1-fluid h1 {
+  .container1-fluid .aba{
     font-size: 28px;
     line-height: 36px;
+    margin-top:-200px;
   }
+  
   .container1-fluid .btn  {
 
   }
@@ -651,6 +653,13 @@ pierre à l’édifice ».
 
   
 }
+@media (max-width: 988px) {
+  .container1-fluid .aba{
+    font-size: 28px;
+    line-height: 36px;
+    margin-top:-100px;
+  }
+   }
 /* fufuyfu */
 .solm{
   color:black;
