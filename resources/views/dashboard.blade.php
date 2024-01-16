@@ -7,7 +7,7 @@
     </x-slot>
 
     <div class="py-12 px-4 " >
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8"style="background-color:orange; padding: 10px;">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8"style="background-color:#f55a2b; padding: 10px;">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <h3 class="text-3xl mx-4 my-4">Les actions possibles</h3>
                 <div class="p-6 bg-white  text-center d-flex justify-content-center align-items-center mt-3 mb-4 ml-2 mr-5">
