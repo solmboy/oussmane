@@ -3,52 +3,49 @@
 
 <div class="container">
 
-    @if (session('success'))
-    <div class="alert alert-info  text-center" style="width: 100rem; margin: auto">
-        {{session('success')}}
-    </div>
-    @endif
-    <div class="section1">
+ <div class="section1">
     <section id="hero" class="d-flex align-items-center">
 
 <div class="container1-fluid">
-  <div class="row">
-    <div class="col-lg-3 pt-4 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center text-left">
-      
-    <p class="aba bg-primary  mb">Un etudiant, un stage
-      <br>FORMATION DE STAGE 100% PRATIQUE
-    </p>
-                <h1 class=" mt-4">Donner les Jeunes Formés un stage </h1>
-                <p class="solm mt-4 " > Possibilite de stage souhaitée,Voici une solution,notre entreprise est là pour vous offrir une expérience optimale aux étudiants du début à la fin</p>
-                 
-            
-              
+    <div class="cards">
+	<article class="information [ card ]">
+		<p class="texttitle">Un etudiant, un stage<br>FORMATION DE STAGE 100% PRATIQUE</p>
+		<!-- <h2 class="title">Never miss your important meetings</h2> -->
+		<p class="solm mt-4">Possibilite de stage souhaitée,Voici une solution,notre entreprise est là pour vous offrir une expérience optimale aux étudiants du début à la fin.</p>
+		<button class="button" data-toggle="modal" data-target="#exampleModalLong">
+			<span>Inscrivez-vous</span>
+			<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="none">
+				<path d="M0 0h24v24H0V0z" fill="none" />
+				<path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z" fill="currentColor" />
+			</svg>
+		</button>
+	</article>
+</div>
+   
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
  Inscrivez vous
-</button>
-
+</button> -->
+   
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">FORMATION DE STAGE 100% PRATIQUE</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <div class="section2">
-        <div class="card my-3 " style="width:28em; margin: auto">
-
-            <div class="card-header text-black fs-5 fw-bold text-center">FORMATION DE STAGE 100% PRATIQUE</div>
-            <div class="card-body">
-                <form action="{{route('store.candidat')}}" method="post" enctype="multipart/form-data">
+        <div>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+           </button>
+        <div>
+           <div>
+              <h5 class="modal-title" id="exampleModalLongTitle">FORMATION DE STAGE 100% PRATIQUE</h5>
+           </div>
+           <div>
+           <form action="{{route('store.candidat')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="email">Adresse Email:</label>
-                        <input type="email" name="email" id="email" placeholder="Votre réponse" class="form-control my-3">
+                        <input type="email" name="email" id="email" placeholder="Votre réponse" class="form-control my-3" required>
                     </div>
                     <div class="form-group">
                         <label for="">Nom:</label>
@@ -57,17 +54,17 @@
 
                     <div class="form-group">
                         <label for="">Prenom:</label>
-                        <input type="text" name="prenom" id="" placeholder="Votre réponse" class="form-control my-3">
+                        <input type="text" name="prenom" id="" placeholder="Votre réponse" class="form-control my-3" required>
                     </div>
 
                     <div class="form-group">
                         <label for="">Téléphone</label>
-                        <input type="tel" name="telephone" id="" placeholder="Votre réponse" class="form-control my-3">
+                        <input type="tel" name="telephone" id="" placeholder="Votre réponse" class="form-control my-3" required>
                     </div>
 
                     <div class="form-group">
                         <label for="">Adresse Domicile</label>
-                        <input type="text" name="adresse" id="" placeholder="Votre réponse" class="form-control my-3">
+                        <input type="text" name="adresse" id="" placeholder="Votre réponse" class="form-control my-3" required>
                     </div>
 
                     <div class="form-group">
@@ -78,7 +75,7 @@
                             @foreach ($module as $modules)
                                 <option value="{{ $modules->libele }}">{{ $modules->libele }}</option>
                             @endforeach
-                            <option value="Ressources Humaines">Ressources Humaines</option>
+                            <!-- <option value="Ressources Humaines">Ressources Humaines</option> -->
                             <option value="Marketing Digital">Marketing Digital</option>
                             <option value="Gestion Projet">Gestion Projet</option>
                             <option value="Informatique Bureautique">Informatique Bureautique</option>
@@ -92,13 +89,13 @@
                     </div>
                     <div class="form-group">
                         <label for="myfile">Télécharger votre CV:</label>
-                        <input type="file" id="myfile" name="myfile" accept = "application/pdf" class="form-control my-3">
+                        <input type="file" id="myfile" name="myfile" accept = "application/pdf" class="form-control my-3"  required>
 
                     </div>
 
                     <div class="form-group">
                         <label for="">Question/Suggestion/Commentaire</label>
-                        <input type="text" name="question" id="" placeholder="Votre réponse" class="form-control my-3">
+                        <input type="text" name="question" id="" placeholder="Votre réponse" class="form-control my-3" required>
                     </div>
 
                     <div class="form-group">
@@ -106,13 +103,25 @@
                         {{-- <button class="btn text-danger float-end mt-2" >Effacer le formumaire</button> --}}
                     </div>
                 </form>
-            </div>
+                @if (session('success'))
+              <script>
+               swal("Success","{{ Session::get('success')}}", 'success',{
+                 button:true,
+                 button:"Ok",
+               });
+              </script>
+              @endif
+           </div>
         </div>
+      </div>
+      </div>
+      <div class="modal-body">
+      <div class="section2">
     </div>
 
 </section>
 
-</div>   
+</div>     
 <!-- : -->
 <main id="main">
 
@@ -612,11 +621,284 @@ pierre à l’édifice ».
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  
+
   <style>
 /* .section1{
     display:flex;
 
 } */
+
+
+@import url("https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap");
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+.deconnect{
+  background-color:#f55a2b;
+
+}
+.texttitle{
+  color:#ffff;
+  background-color:#f55a2b;
+  border-radius:10px;
+  padding:10px;
+}
+:root {
+	// Basic
+	--c-white: #fff;
+	--c-black: #000;
+
+	// Greys
+	--c-ash: #eaeef6;
+	--c-charcoal: #a0a0a0;
+	--c-void: #141b22;
+
+	// Beige/Browns
+	--c-fair-pink: #FFEDEC;
+	--c-apricot: #FBC8BE;
+	--c-coffee: #754D42;
+	--c-del-rio: #917072;
+
+	// Greens
+	--c-java: #1FCAC5;
+
+	// Purples
+	--c-titan-white: #f1eeff;
+	--c-cold-purple: #a69fd6;
+	--c-indigo: #6558d3;
+	--c-governor: #4133B7;
+}
+
+/* body {
+	font-family: "Spline Sans", sans-serif;
+	line-height: 1.5;
+	min-height: 100vh;
+	background-color: var(--c-ash);
+} */
+
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 2.5rem;
+	width: 90%;
+	max-width: 1000px;
+	margin: 10vh auto;
+}
+
+.card {
+  margin-top:110px;
+	border-radius: 16px;
+	box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);
+	max-width: 500px;
+}
+
+
+.information {
+	background-color: var(--c-white);
+	padding: 1.5rem;
+
+	.tag {
+		display: inline-block;
+		background-color: var(--c-titan-white);
+		color: var(--c-indigo);
+		font-weight: 600;
+		font-size: 1rem;
+		padding: 0.5em 0.75em;
+		line-height: 1;
+		border-radius: 6px;
+		& + * {
+			margin-top: 1rem;
+		}
+	}
+
+	.title {
+		font-size: 1.5rem;
+		color: var(--c-void);
+		line-height: 1.25;
+		& + * {
+			margin-top: 1rem;
+		}
+	}
+
+	.info {
+		color: var(--c-charcoal);
+		& + * {
+			margin-top: 1.25rem;
+		}
+	}
+
+	.button {
+		font: inherit;
+		line-height: 1;
+		background-color: var(--c-white);
+		border: 1px solid;
+		color: #ffff;
+		padding: 0.5em 1em;
+		border-radius: 6px;
+		font-weight: 500;
+		display: inline-flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.5rem;
+    margin-top:10px;
+		&:focus {
+			background-color: var(--c-indigo);
+			color: var(--c-white);
+		}
+	}
+	.button:hover{
+    background-color:#f55a2b;
+  }
+	.details {
+		display: flex;
+		gap: 1rem;
+		div {
+			padding: .75em 1em;
+			background-color: var(--c-titan-white);
+			border-radius: 8px;
+			display: flex;
+			flex-direction: column-reverse;
+			gap: .125em;
+			flex-basis: 50%;
+		}
+		
+		dt {
+			font-size: .875rem;
+			color: var(--c-cold-purple);
+		}
+		
+		dd {
+			color: var(--c-indigo);
+			font-weight: 600;
+			font-size: 1.25rem;
+		}
+	}
+}
+.plan {
+	padding: 10px;
+	background-color: var(--c-white);
+	color: var(--c-del-rio);
+	
+	strong {
+		font-weight: 600;
+		color: var(--c-coffee);
+	}
+	
+	.inner {
+		padding: 20px;
+		padding-top: 40px;
+		background-color: var(--c-fair-pink);
+		border-radius: 12px;
+	position: relative;
+		overflow: hidden;
+	}
+	
+	.pricing {
+		position: absolute;
+		top: 0;
+		right: 0;
+		background-color: var(--c-apricot);
+		border-radius: 99em 0 0 99em;
+		display: flex;
+		align-items: center;
+		padding: .625em .75em;
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: var(--c-coffee);
+		small {
+			color: var(--c-del-rio);
+			font-size: .75em;
+			margin-left: .25em;
+		}
+		
+	}
+	
+	.title {
+		font-weight: 600;
+		font-size: 1.25rem;
+		color: var(--c-coffee);
+		& + * {
+			margin-top: .75rem;
+		}
+	}
+	
+	.info {
+		& + * {
+			margin-top: 1rem;
+		}
+	}
+	
+	.features {
+		display: flex;
+		flex-direction: column;
+		li {
+			display: flex;
+			align-items: center;
+			gap: .5rem;
+			& + * {
+				margin-top: .75rem;
+			}
+		}
+		
+		.icon {
+			background-color: var(--c-java);
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			color: var(--c-white);
+			border-radius: 50%;
+			width: 20px;
+			height: 20px;
+			svg {
+				width: 14px;
+				height: 14px;
+			}
+		}
+		
+		& + * {
+			margin-top: 1.25rem;
+		}
+	}
+	
+	button {
+		font: inherit;
+		background-color: var(--c-indigo);
+		border-radius: 6px;
+		color: var(--c-white);
+		font-weight: 500;
+		font-size: 1.125rem;
+		width: 100%;
+		border: 0;
+		padding: 1em;
+		&:hover,
+		&:focus {
+			background-color: var(--c-governor);
+		}
+	}
+	
+	
+}
+
+
+
+.textintro{
+  display:flex;
+  flex-direction:column;
+  justify-content:left;
+  width: 450px;
+  margin-top:300px;
+}
+.close{
+  float:right;
+}
+
+
 .container1-fluid {
   background-image: url('images/defarsci.jpg');
   background-size: cover;
@@ -940,7 +1222,7 @@ transition: 0.5s;
 color: #fff;
 }
 
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
 .mobile-nav-toggle {
 display: block;
 }
@@ -948,7 +1230,7 @@ display: block;
 .navbar ul {
 display: none;
 }
-}
+} */
 
 .navbar-mobile {
 position: fixed;
