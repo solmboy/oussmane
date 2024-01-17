@@ -38,13 +38,20 @@ class ModuleController extends Controller
      */
     public function store(Request $request)
     {
-        $module = new Module();
 
-        $module->libele = $request->libele;
+        $request->validate([
+            'libele' => 'required',
+            'description' => 'required',
+           
+        ]);
+
+        $module = new Module();
+        $module->libele = $request->input('libele');
+        $module->description = $request->input('description');
 
         $module->save();
 
-        return redirect()->back()->with('success','module enregistré');
+        return redirect()->route('liste.module')->with('success','module enregistré');
     }
 
     /**
@@ -85,6 +92,7 @@ class ModuleController extends Controller
         $module= Module::find($id);
 
         $module->libele = $request->libele;
+        $module->description = $request->description;
 
         $module->update();
 

@@ -43,38 +43,6 @@
   <script src="https://kit.fontawesome.com/dd5559ee21.js" crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-  <style>
-       .containerlogo{
-  margin-left:-50px;
-  }
-  .logo_defarsci{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-  }
-  a {
-    font-family: 'Darker Grotesque', sans-serif;
-    font-size:20px;
-    text-decoration: none;
-  }
-  .lavish {
-    font-family: 'Lavishly Yours', cursive;
-  }
-
-  .customSubMenuHolder:hover > .customSubMenu{
-    display:block
-  }
-  .customSubMenu {
-    display:none;
-    box-shadow: 2px 8px 12px rgba(0,0,0,0.5);
-    position:absolute;
-    width:100%;
-    left:0;
-    background:#00354b;
-  }
-
-  
-  </style>
 
 <title>@yield('title', 'Defarsci-candidature')</title>
   <meta name="description" content="Full width navbar with submenu tiles, designed with bootstrap 5">
@@ -133,55 +101,272 @@
         @yield('content')
     </main>
 
-</body>
 
-</html>
-    <x-slot name="header">
+<x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
-    <div class="py-12 px-4 " >
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8"style="background-color:#f55a2b; padding: 10px;">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <h3 class="text-3xl mx-4 my-4">Les actions possibles</h3>
-                <div class="p-6 bg-white  text-center d-flex justify-content-center align-items-center mt-3 mb-4 ml-2 mr-5">
-                <div class="quick_activity_wrap ">
-    <div class="single_quick_activity d-flex">
-    <div class="icon">
-   
-    <div class="count_content">
-                <a href="{{ route('users') }}" class="inline-flex items-center px-6 py-4 border border-3 border-primary-400 p-3 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white d-flex justify-content-center align-items-center ">
-                <i class="bi bi-person">   Gestion des utilisateurs</i>
-    
-             
-                    </a>
-    </div>
-    </div>
-    <div class="single_quick_activity d-flex ad-flex justify-content-center align-items-center">
-    <div class="icon">
-   
-  
-               <div class="count_content">        
-                    <a href="{{ route('liste.candidat') }}" class="inline-flex items-center px-6 py-4 border border-3 border-primary-400 p-3 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white">
-                    <i class="bi bi-person-arms-up">Gestion des candidature</i>  
-                    </a>
-                    </div>
-                    </div>
-
-                    <div class="single_quick_activity d-flex " >
-                   <div class="icon">
-                    <a href="{{ route('liste.module') }}" class="inline-flex items-center px-6 py-4 border border-3 border-primary-400 p-3 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white" >
-                    <i class="bi bi-wallet2">Gestion des modules</i>  
-                    </a>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    <!--  -->
-                </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @if(session('success'))
+    <script>
+    swal("Success","{{ Session::get('success')}}", 'success',{
+        button:true,
+        button:"Ok",
+    });
+    </script>
+    @endif
+    <div class="card-dashboard">
+    <a href="{{ route('users') }}">
+        <div class="row">
+            <div class="card">
+                <h4>Gestion des utilisateurs</h4>
             </div>
         </div>
+        </a>
+    <a href="{{ route('liste.candidat') }}">
+        <div class="row">
+            <div class="card">
+                <h4>Gestion des candidature</h4>
+            </div>
+        </div>
+    </a>
+    <a href="{{ route('liste.module') }}">
+        <div class="row">
+            <div class="card">
+                <h4>Gestion des modules</h4>
+            </div>
+        </div>
+    </a>
     </div>
+    </body>
+</html>
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext");
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.card-dashboard{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+   
+    gap:20px;
+}
+.card-dashboard a{
+    text-decoration:none;
+    color:none;
+}
+
+
+/* .card {
+  border-radius: 10px;
+  filter: drop-shadow(0 5px 10px 0 #ffffff);
+  width: 400px;
+  height: 180px;
+  background-color: #ffffff;
+  padding: 20px;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  transition: 0.6s ease-in;
+} */
+.card h4{
+   margin-top:30px;
+}
+.card {
+    border-radius: 10px;
+    filter: drop-shadow(0 5px 10px 0 #ffffff);
+    width: 350px;
+    height: 120px;
+    background-color: #ffffff;
+    padding: 20px;
+    z-index: 0;
+    overflow: hidden;
+    transition: 0.6s ease-in;
+  
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -15px;
+  right: -15px;
+  background: #f55a2b;
+  height:220px;
+  width: 25px;
+  border-radius: 32px;
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  transition: transform 0.25s ease-out;
+}
+
+.card:hover::before{
+    transition-delay:0.2s ;
+    transform: scale(40);
+}
+
+.card:hover{
+    color: #ffffff;
+}
+
+.card p{
+    padding: 10px 0;
+}
+
+
+</style>
+<style>
+
+.deconnect{
+  background-color:#f55a2b;
+
+}
+.navbar {
+padding: 0;
+}
+
+.navbar ul {
+margin: 0;
+padding: 0;
+display: flex;
+list-style: none;
+align-items: center;
+}
+
+.navbar li {
+position: relative;
+}
+
+.navbar a,
+.navbar a:focus {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 10px 0 10px 30px;
+font-family: "Dosis", sans-serif;
+font-size: 15px;
+font-weight: 600;
+color: #0f394c;
+white-space: nowrap;
+transition: 0.3s;
+text-transform: uppercase;
+}
+
+.navbar a i,
+.navbar a:focus i {
+font-size: 12px;
+line-height: 0;
+margin-left: 5px;
+}
+
+.navbar a:hover,
+.navbar .active,
+.navbar .active:focus,
+.navbar li:hover>a {
+color: #49b5e7;
+}
+
+.navbar .dropdown ul {
+display: block;
+position: absolute;
+left: 14px;
+top: calc(100% + 30px);
+margin: 0;
+padding: 10px 0;
+z-index: 99;
+opacity: 0;
+visibility: hidden;
+background: #fff;
+box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+transition: 0.3s;
+}
+
+.navbar .dropdown ul li {
+min-width: 200px;
+}
+
+.navbar .dropdown ul a {
+padding: 10px 20px;
+font-size: 15px;
+text-transform: none;
+font-weight: 500;
+}
+
+.navbar .dropdown ul a i {
+font-size: 12px;
+}
+
+.navbar .dropdown ul a:hover,
+.navbar .dropdown ul .active:hover,
+.navbar .dropdown ul li:hover>a {
+color: #49b5e7;
+}
+
+.navbar .dropdown:hover>ul {
+opacity: 1;
+top: 100%;
+visibility: visible;
+}
+
+.navbar .dropdown .dropdown ul {
+top: 0;
+left: calc(100% - 30px);
+visibility: hidden;
+}
+
+.navbar .dropdown .dropdown:hover>ul {
+opacity: 1;
+top: 0;
+left: 100%;
+visibility: visible;
+}
+
+@media (max-width: 1366px) {
+.navbar .dropdown .dropdown ul {
+left: -90%;
+}
+
+.navbar .dropdown .dropdown:hover>ul {
+left: -100%;
+}
+} 
+
+</style>
+<style>
+       .containerlogo{
+  margin-left:-50px;
+  }
+  .logo_defarsci{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+  }
+  a {
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size:20px;
+    text-decoration: none;
+  }
+  .lavish {
+    font-family: 'Lavishly Yours', cursive;
+  }
+
+  .customSubMenuHolder:hover > .customSubMenu{
+    display:block
+  }
+  .customSubMenu {
+    display:none;
+    box-shadow: 2px 8px 12px rgba(0,0,0,0.5);
+    position:absolute;
+    width:100%;
+    left:0;
+    background:#00354b;
+  }
+
+  
+  </style>

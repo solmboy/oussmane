@@ -83,6 +83,7 @@ public function store(Request $request)
 
     // enregistrer les données dans la base de données
     $candidat = new Candidat();
+   
     $candidat->email = $validated['email'];
     $candidat->nom = $validated['nom'];
     $candidat->prenom = $validated['prenom'];
@@ -162,12 +163,21 @@ public function store(Request $request)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // Editer la candidature
     public function update(Request $request, $id)
     {
+       
         $candidat = Candidat::findOrFail($id);
-        // $candidat->update($request->all());
+        $candidat->email = $request->input('email');
+        $candidat->nom = $request->input('nom');
+        $candidat->prenom= $request->input('prenom');
+        $candidat->telephone = $request->input('telephone');
+        $candidat->adresse = $request->input('adresse');
+        $candidat->domaine = $request->input('domaine');    
+       $candidat->save();
+       
+       return redirect('dashboard')->with('success', 'Candidat a été bien mis à jours ');
 
-        $candidat->update($request->except('myfile'));
     }
 
     /**

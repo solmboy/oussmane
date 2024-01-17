@@ -1,7 +1,7 @@
 @extends('layouts.front')
 @section('content')
 
-<div class="container">
+<div class="container-fluid">
 
  <div class="section1">
     <section id="hero" class="d-flex align-items-center">

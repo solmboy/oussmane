@@ -132,9 +132,7 @@
   <main class="mt-5 pt-5">
         @yield('content')
     </main>
-    <style>
-      
-    </style>
+    
 
 </body>
 
