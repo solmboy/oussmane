@@ -33,13 +33,24 @@ class UsersController extends Controller
 
         $user->update($validatedData);
 
-        return redirect()->back()->with('success', 'Les informations ont bien été modifiées');
+        return redirect()->route('users')->with('success', 'Les informations ont bien été modifiées');
     }
 
-    public function destroy(User $user) {
-    	$user->delete();
-    	return redirect()->back()->with('success', 'L\'utilisateur a bien été supprimé');
+    // public function destroy(User $user) {
+    // 	$user->delete();
+    // 	return redirect()->back()->with('success', 'L\'utilisateur a bien été supprimé');
+    // }
+
+
+
+    public function destroy($user)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return back();
     }
+
+
 
     private function isAbleToEdit(User $user) {
         if($user->id == request()->user()->id and !request()->user()->admin) {
@@ -68,6 +79,6 @@ class UsersController extends Controller
         ]);
 
         // Redirigez l'utilisateur après l'ajout
-        return redirect()->route('users');
+        return redirect()->route('users')->with('success', "L'utilisateur a été bien enregistré");
     }
 }

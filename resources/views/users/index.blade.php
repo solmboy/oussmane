@@ -133,287 +133,241 @@
         @yield('content')
     </main>
 
-</body>
-
-</html>
-
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Gestion des utilisateurs
-        </h2>
-    </x-slot>
-    <div class="flex flex-col flex-1 ">
-            
-            <main class="flex-1 bg-gray-200">
-                <div class="container px-6 mt-2 mx-auto" >
-                    <div class="py-6">
-                        <div class="max-w-7xl mx-auto">
-                            <div class="bg-gray-400 overflow-hidden shadow-sm sm:rounded-lg border border-blue-700">
-                                <div class="p-6" style="color: rgb(255, 119, 0); text-align:center;font-weight:800; font-size:30px; ">
-                                
-
-                <h3 class="text-3xl">Liste des utilisateurs</h3>
-                
-                <a href="{{ route('users.create')}}" class=" btn btn-primary bg-blue-500 text-black border border-blue-700 px-4 py-2 rounded">Ajouter</a>
-                
-            </div>
-            <div class="flex flex-col mt-8">
-                        <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                            <div class="inline-block min-w-full overflow-hidden align-middle border-b border-primary shadow sm:rounded-lg">
-                                <table class="min-w-full mx-auto">
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-blue-700 bg-gray-50">
-                                                Nom
-                                            </th>
-                                            
-                                            <th
-                                                class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-blue-700 bg-gray-50">
-                                                Email
-                                             </th>
-                                             <th
-                                                class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-blue-700 bg-gray-50">
-                                                Role
-                                             </th>
-                                             <th
-                                                class="px-6 py-3 text-sm font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-blue-700 bg-gray-50">
-                                                Action
-                                             </th>
-                                             </tr>
-                        </thead>
-
-                        <tbody class="bg-white divide-y divide-primary">
-                              @foreach($users as $user)
-                                                        <tr class="border-b border-blue-700 p-3">
-                                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-primary p-3 ">
-                                                                <div class="flex items-center">
-                                                                    
-                                                                    <div class="ml-4">
-                                                                        <div class="text-sm font-medium leading-5 text-gray-900">{{$user->name}}</div>
-                                                                    </div>
-                                                                
-                                                            </td>
-                                                            
-                                                         
-                                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-primary p-3">
-                                                                <div class="text-sm leading-5 text-gray-900">{{$user->email}}</div>
-                                                            </td>
-                                                            
-                                                            <td class="px-6 py-4 whitespace-no-wrap border-b border-primary p-3">
-                                        <div class="text-sm font-medium {{ $user->admin ? 'text-red-600' : 'text-green-600' }}">
-                                            {{ $user->admin ? 'Administrateur' : 'Utilisateur' }}
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium d-flex items-center">
-                                       <div>
-                                       <a href="{{ route('users.edit', $user) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
-                                        <a href="{{ route('users.destroy', $user) }}" class="btn btn-danger" ><i class="fa fa-trash" aria-hidden="true"></i></a>
-<td>
-                            
-                                       </div>
-                                        <!-- <form action="{{ route('users.destroy', $user) }}" method="POST" class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn p-2 text-white" style="background-color: orange; 
-                                                                border-radius:5px; font-weight:600;" >Supprimer</button>
-                                        </form> -->
-                                    </td>
-                                    </tr> 
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>   
-                    </div>
-                </div>
-            </main>
+<div class="container">
+    <div class="bg-gray-400 overflow-hidden shadow-sm sm:rounded-lg border border-blue-700">
+    <div class="p-6" style="color: rgb(255, 119, 0); text-align:center;font-weight:800; font-size:30px; ">
+    <h3 class="text-3xl">Liste des utilisateurs</h3>
+    <a href="{{ route('users.create')}}" class=" btn btn-primary bg-blue-500 text-black border border-blue-700 px-4 py-2 rounded">Ajouter</a>
+    </div><br>
+    <ul class="responsive-table">
+      <li class="table-header">
+        <div class="col col-1">Nom</div>
+        <div class="col col-1">Email</div>
+        <div class="col col-1">Role</div>
+        <div class="col col-1">Action</div>
+      </li>
+      @foreach($users as $user)
+      <li class="table-row">
+        <div class="col col-1" data-label="Nom">{{$user->name}}</div>
+        <div class="col col-1 {{ $user->admin ? 'text-red' : 'text-green-600' }}" data-label="Email">{{$user->email}}</div>
+        <div   data-label="Role">{{ $user->admin ? 'Administrateur' : 'Utilisateur' }}</div>
+        <div class="col col-1 action">
+            <a href="{{ route('users.edit', $user) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            <a href="{{route('delete-user',$user->id)}}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
         </div>
+      </li>
+      @endforeach
+    </ul>
+        @if(session('success'))
+        <script>
+        swal("Success","{{ Session::get('success')}}", 'success',{
+            button:true,
+            button:"Ok",
+        });
+        </script>
+        @endif
+  </div>
+  </body>
+</html>
+<style>
+      .action{
+        display:flex;
+        gap:10px;
+      }
+  body {
+    font-family: 'lato', sans-serif;
+  }
+  .container {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  h2 {
+    font-size: 26px;
+    margin: 20px 0;
+    text-align: center;
+    small {
+      font-size: 0.5em;
+    }
+  }
+  
+  .responsive-table {
+    li {
+      border-radius: 3px;
+      padding: 25px 30px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+    .table-header {
+      background-color: #95A5A6;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .table-row {
+      background-color: #ffffff;
+      box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+    }
+    .col-1 {
+      flex-basis: 10%;
+    }
+    .col-2 {
+      flex-basis: 40%;
+    }
+    .col-3 {
+      flex-basis: 25%;
+    }
+    .col-4 {
+      flex-basis: 25%;
+    }
+    
+    @media all and (max-width: 767px) {
+      .table-header {
+        display: none;
+      }
+ 
+      li {
+        display: block;
+      }
+      .col {
+        
+        flex-basis: 100%;
+        
+      }
+      .col {
+        display: flex;
+        padding: 10px 0;
+        &:before {
+          color: #6C7A89;
+          padding-right: 10px;
+          content: attr(data-label);
+          flex-basis: 50%;
+          text-align: right;
+        }
+      }
+    }
+  }
+        .test{
+            width:100%;
+        }
 
-        <style>
+        .deconnect{
+        background-color:#f55a2b;
 
-.deconnect{
-  background-color:#f55a2b;
+        }
+        .navbar {
+        padding: 0;
+        }
 
-}
-.navbar {
-padding: 0;
-}
+        .navbar ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        list-style: none;
+        align-items: center;
+        }
 
-.navbar ul {
-margin: 0;
-padding: 0;
-display: flex;
-list-style: none;
-align-items: center;
-}
+        .navbar li {
+        position: relative;
+        }
 
-.navbar li {
-position: relative;
-}
+        .navbar a,
+        .navbar a:focus {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0 10px 30px;
+        font-family: "Dosis", sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        color: #0f394c;
+        white-space: nowrap;
+        transition: 0.3s;
+        text-transform: uppercase;
+        }
 
-.navbar a,
-.navbar a:focus {
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 10px 0 10px 30px;
-font-family: "Dosis", sans-serif;
-font-size: 15px;
-font-weight: 600;
-color: #0f394c;
-white-space: nowrap;
-transition: 0.3s;
-text-transform: uppercase;
-}
+        .navbar a i,
+        .navbar a:focus i {
+        font-size: 12px;
+        line-height: 0;
+        margin-left: 5px;
+        }
 
-.navbar a i,
-.navbar a:focus i {
-font-size: 12px;
-line-height: 0;
-margin-left: 5px;
-}
+        .navbar a:hover,
+        .navbar .active,
+        .navbar .active:focus,
+        .navbar li:hover>a {
+        color: #49b5e7;
+        }
 
-.navbar a:hover,
-.navbar .active,
-.navbar .active:focus,
-.navbar li:hover>a {
-color: #49b5e7;
-}
+        .navbar .dropdown ul {
+        display: block;
+        position: absolute;
+        left: 14px;
+        top: calc(100% + 30px);
+        margin: 0;
+        padding: 10px 0;
+        z-index: 99;
+        opacity: 0;
+        visibility: hidden;
+        background: #fff;
+        box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+        transition: 0.3s;
+        }
 
-.navbar .dropdown ul {
-display: block;
-position: absolute;
-left: 14px;
-top: calc(100% + 30px);
-margin: 0;
-padding: 10px 0;
-z-index: 99;
-opacity: 0;
-visibility: hidden;
-background: #fff;
-box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-transition: 0.3s;
-}
+        .navbar .dropdown ul li {
+        min-width: 200px;
+        }
 
-.navbar .dropdown ul li {
-min-width: 200px;
-}
+        .navbar .dropdown ul a {
+        padding: 10px 20px;
+        font-size: 15px;
+        text-transform: none;
+        font-weight: 500;
+        }
 
-.navbar .dropdown ul a {
-padding: 10px 20px;
-font-size: 15px;
-text-transform: none;
-font-weight: 500;
-}
+        .navbar .dropdown ul a i {
+        font-size: 12px;
+        }
 
-.navbar .dropdown ul a i {
-font-size: 12px;
-}
+        .navbar .dropdown ul a:hover,
+        .navbar .dropdown ul .active:hover,
+        .navbar .dropdown ul li:hover>a {
+        color: #49b5e7;
+        }
 
-.navbar .dropdown ul a:hover,
-.navbar .dropdown ul .active:hover,
-.navbar .dropdown ul li:hover>a {
-color: #49b5e7;
-}
+        .navbar .dropdown:hover>ul {
+        opacity: 1;
+        top: 100%;
+        visibility: visible;
+        }
 
-.navbar .dropdown:hover>ul {
-opacity: 1;
-top: 100%;
-visibility: visible;
-}
+        .navbar .dropdown .dropdown ul {
+        top: 0;
+        left: calc(100% - 30px);
+        visibility: hidden;
+        }
 
-.navbar .dropdown .dropdown ul {
-top: 0;
-left: calc(100% - 30px);
-visibility: hidden;
-}
+        .navbar .dropdown .dropdown:hover>ul {
+        opacity: 1;
+        top: 0;
+        left: 100%;
+        visibility: visible;
+        }
 
-.navbar .dropdown .dropdown:hover>ul {
-opacity: 1;
-top: 0;
-left: 100%;
-visibility: visible;
-}
+        @media (max-width: 1366px) {
+        .navbar .dropdown .dropdown ul {
+        left: -90%;
+        }
 
-@media (max-width: 1366px) {
-.navbar .dropdown .dropdown ul {
-left: -90%;
-}
-
-.navbar .dropdown .dropdown:hover>ul {
-left: -100%;
-}
-} 
-
+        .navbar .dropdown .dropdown:hover>ul {
+        left: -100%;
+        }
+        } 
 </style>
 
-        <!--   autre projet -->
-<!-- 
- <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" style="padding:20px">
-            <div class="flex items-center justify-between mb-4">
-            <h3 class="text-3xl">Liste des utilisateurs</h3>
-                
-                <a href="{{ route('users.create')}}" class=" btn btn-primary bg-blue-500 text-black border border-blue-700 px-4 py-2 rounded">Ajouter</a>
-                
-            </div>
-        
-               <div class="overflow-x-auto py-6
-                ">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-primary ">
-                            <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Nom
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Email
-                                </th> 
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Rôle
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Actions
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-200"> 
-                            @foreach($users as $user)
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            {{ $user->name }}
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            {{ $user->email }}
-                                        </div>
-                                    </td> 
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium {{ $user->admin ? 'text-red-600' : 'text-green-600' }}">
-                                            {{ $user->admin ? 'Administrateur' : 'Utilisateur' }}
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex items-center">
-                                        <a href="{{ route('users.edit', $user) }}" class="text-indigo-600 hover:text-indigo-900 ">Modifier</a>
-                                        <form action="{{ route('users.destroy', $user) }}" method="POST" class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 ml-4 hover:text-red-900 " style="color:orange" >Supprimer</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
- -->
+    
